@@ -1,0 +1,10 @@
+              precision    recall  f1-score   support
+
+      Closed       1.00      0.95      0.98       109
+        Open       0.96      1.00      0.98       109
+     no_yawn       0.69      0.89      0.78       109
+        yawn       0.85      0.61      0.71       109
+
+    accuracy                           0.86       436
+   macro avg       0.87      0.86      0.86       436
+weighted avg       0.87      0.86      0.86       436

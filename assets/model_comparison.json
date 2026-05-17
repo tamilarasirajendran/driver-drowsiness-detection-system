@@ -1,0 +1,10 @@
+{
+  "custom_cnn": {
+    "best_val_accuracy": 0.8206896781921387,
+    "best_val_loss": 0.3755358159542084
+  },
+  "mobilenetv2": {
+    "best_val_accuracy": 0.8045976758003235,
+    "best_val_loss": 0.35415616631507874
+  }
+}
