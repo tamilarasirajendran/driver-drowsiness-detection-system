@@ -7,9 +7,9 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import os
 
-# =====================================================
 # CONFIG
-# =====================================================
+# I set the page configuration for the Streamlit app, including title, icon, and layout. I also defined the model path
+# and class names used for prediction.
 st.set_page_config(
     page_title="Driver Drowsiness Detection",
     page_icon="🚗",
@@ -20,9 +20,9 @@ st.set_page_config(
 MODEL_PATH = "models/mobilenetv2.keras"
 CLASS_NAMES = ["Closed", "Open", "no_yawn", "yawn"]
 
-# =====================================================
 # LOAD MODEL
-# =====================================================
+# I created a function to load the trained model from the specified path.
+# It checks multiple possible filenames and raises an error if no model is found. The loaded model is cached to improve performance on subsequent runs.
 @st.cache_resource
 def load_model():
     if os.path.exists(MODEL_PATH):
@@ -38,9 +38,9 @@ def load_model():
 
 model = load_model()
 
-# =====================================================
 # STYLE
-# =====================================================
+# I added custom CSS styles for the dashboard, including styles for titles, subtitles, cards, and result indicators 
+# (good, warn, bad) to enhance the visual appearance of the app.
 st.markdown("""
 <style>
 .title {
@@ -84,9 +84,9 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# =====================================================
 # HELPERS
-# =====================================================
+# I created helper functions to preprocess images for model input, generate user-friendly result 
+# messages based on predicted labels and confidence, and display a bar chart of prediction probabilities.
 def preprocess_image(img):
     img = img.resize((224, 224))
     img_array = np.array(img) / 255.0
@@ -110,9 +110,9 @@ def show_probability_chart(pred):
     plt.tight_layout()
     return fig
 
-# =====================================================
 # SIDEBAR
-# =====================================================
+# I created a sidebar with a title, navigation options for different pages (Dashboard, Image Detection, Live Webcam),
+# and displayed model information such as accuracy and architecture.
 st.sidebar.title("🚗 Driver Monitor")
 page = st.sidebar.radio(
     "Navigation",
@@ -123,9 +123,9 @@ st.sidebar.markdown("---")
 st.sidebar.write("Model Accuracy: **90.37%**")
 st.sidebar.write("Model: **MobileNetV2**")
 
-# =====================================================
 # DASHBOARD
-# =====================================================
+# I created a dashboard page that displays the project title, description, and key metrics in styled cards. 
+# It explains what the project does and provides an overview of the driver drowsiness detection system.
 if page == "🏠 Dashboard":
     st.markdown('<div class="title">🚗 Driver Drowsiness Detection System</div>', unsafe_allow_html=True)
     st.markdown('<div class="subtitle">Deep learning-based eye closure and yawning detection.</div>', unsafe_allow_html=True)
@@ -145,9 +145,10 @@ if page == "🏠 Dashboard":
         "Then it converts that prediction into a simple fatigue result like Alert, Mild Fatigue, or Severe Fatigue."
     )
 
-# =====================================================
 # IMAGE DETECTION
-# =====================================================
+# I created an image detection page where users can upload a driver image. The app displays the uploaded image,
+# runs the prediction using the loaded model, and shows the result with a user-friendly message and a probability chart. 
+# The result is styled based on the predicted class to indicate
 elif page == "📷 Image Detection":
     st.markdown('<div class="title">📷 Image Detection</div>', unsafe_allow_html=True)
     st.markdown('<div class="subtitle">Upload one image and get the result instantly.</div>', unsafe_allow_html=True)
@@ -184,9 +185,10 @@ elif page == "📷 Image Detection":
 
             st.pyplot(show_probability_chart(pred), use_container_width=True)
 
-# =====================================================
 # LIVE WEBCAM
-# =====================================================
+# I created a live webcam detection page where users can start their camera for real-time driver monitoring.
+# The app captures video frames, runs predictions on each frame, and displays the result with styled messages 
+# based on the predicted class. Users can stop the camera at any time to end the live detection.
 elif page == "🎥 Live Webcam":
     st.markdown('<div class="title">🎥 Live Webcam Detection</div>', unsafe_allow_html=True)
     st.markdown('<div class="subtitle">Start the camera for live driver monitoring.</div>', unsafe_allow_html=True)

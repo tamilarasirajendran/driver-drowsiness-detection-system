@@ -28,11 +28,9 @@ BATCH_SIZE = 32 #Processes 32 images at one time
 
 os.makedirs(ASSETS_DIR, exist_ok=True)
 
-
 # LOAD MODEL
 # Loads the trained MobileNetV2 model
 model = load_model(MODEL_PATH)
-
 
 # TEST DATA
 # Normalizes image pixel values
@@ -49,7 +47,6 @@ test_data = test_datagen.flow_from_directory(
     shuffle=False
 )
 
-
 # EVALUATE
 # Evaluates model performance
 loss, accuracy = model.evaluate(
@@ -60,14 +57,12 @@ loss, accuracy = model.evaluate(
 print(f"\nTest Accuracy: {accuracy * 100:.2f}%") #Prints test accuracy
 print(f"Test Loss: {loss:.4f}") #Prints model loss
 
-
 # PREDICTIONS
 # Generates predictions for test images
 predictions = model.predict(
     test_data,
     verbose=1
 )
-
 #Gets predicted class label
 y_pred = np.argmax(predictions, axis=1)
 
@@ -78,7 +73,6 @@ y_true = test_data.classes
 class_names = list(
     test_data.class_indices.keys()
 )
-
 
 # CONFUSION MATRIX
 # Creates confusion matrix
@@ -116,7 +110,6 @@ plt.savefig(
 )
 
 plt.show()
-
 
 # CLASSIFICATION REPORT
 # Generates classification report

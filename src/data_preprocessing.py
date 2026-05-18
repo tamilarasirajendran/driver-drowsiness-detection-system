@@ -6,7 +6,6 @@ import random
 DATASET_PATH = "dataset"
 OUTPUT_PATH = "dataset_split"
 CLASSES = ["Closed", "Open", "yawn", "no_yawn"]
-
 def split_data():
     for split in ["train", "val", "test"]:
         for cls in CLASSES:
