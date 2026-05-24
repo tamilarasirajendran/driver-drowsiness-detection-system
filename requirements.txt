@@ -1,9 +1,9 @@
 
-tensorflow
-opencv-python
+streamlit==1.45.1
+tensorflow==2.16.1
+opencv-python-headless
 numpy
 matplotlib
-streamlit
-scikit-learn
 pillow
+scikit-learn
 seaborn
